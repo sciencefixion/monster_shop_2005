@@ -19,7 +19,7 @@ RSpec.describe "User session" do
     click_button "Login"
 
     expect(current_path).to eq("/profile")
-    
+
     expect(page).to have_content("You are now logged in.")
 
     # If I am a merchant user, I am redirected to my merchant dashboard page

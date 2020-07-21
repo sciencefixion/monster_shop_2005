@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def show
-
+    
   end
 
   def new
@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
       session[:user_id] = user.id
-      binding.pry
       redirect_to "/profile"
       flash[:notice] = "You are now logged in."
     else
