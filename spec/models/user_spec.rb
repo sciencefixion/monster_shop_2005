@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
         expect(user.merchant?).to be_truthy
 
       end
-      xit "can create a admin user" do
+      it "can create a admin user" do
         user = User.create!(name: "Pam", address: "3455 LKV", city: "Hell", state: "MI", email: "test3@test.com", zip: "56765", password: "123456", role: 2)
 
         expect(user.role).to eq("admin")
