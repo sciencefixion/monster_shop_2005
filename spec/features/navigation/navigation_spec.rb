@@ -32,6 +32,27 @@ RSpec.describe 'Site Navigation' do
         expect(page).to have_content("Cart: 0")
       end
 
+      # Next to the shopping cart link I see a count of the items in my cart
     end
+    it "displays a link in navigation to welcome / home page of the application" do
+      visit '/merchants'
+
+      within 'nav' do
+        expect(page).to have_link("Home")
+      end
+      
+    end
+    it "displays a link to login and register" do
+
+      visit '/merchants'
+
+      within 'nav' do
+        expect(page).to have_link("Login")
+        expect(page).to have_link("Register")
+      end
+
+
+    end
+
   end
 end
