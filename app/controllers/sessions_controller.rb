@@ -9,5 +9,7 @@ class SessionsController < ApplicationController
 
   def create
 
+    redirect_to "/profile"
+    flash[:notice] = "You are now logged in."
   end
 end
