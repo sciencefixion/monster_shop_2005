@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       user = User.new(user_params)
 
       if user.save
-        user_session(user.id)
+        session[:user_id] = user.id
         redirect_to "/profile"
 
         flash[:success] = "#{user.name} has been registered and logged in"
