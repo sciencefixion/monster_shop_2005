@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Merchant navigation" do
   it "as a merchant employee, it displays same links as regurlar user PLUS a link to my merchant dashboard" do
-    merchant = User.create(name: "Michael", address: "3455 LKV", city: "Hell", state: "MI", email: "test1@test.com", zip: "56765", password: "123456", role: 1)
+    user = User.create(name: "Michael", address: "3455 LKV", city: "Hell", state: "MI", email: "test1@test.com", zip: "56765", password: "123456", role: 1)
 
     visit '/merchants'
 
@@ -21,7 +21,7 @@ RSpec.describe "Merchant navigation" do
       expect(page).to_not have_link("Login")
       expect(page).to_not have_link("Register")
     end
-    expect(merchant.merchant?).to be_truthy
+    expect(user.merchant?).to be_truthy
     expect(page).to have_content("Logged in as Michael")
   end
 end

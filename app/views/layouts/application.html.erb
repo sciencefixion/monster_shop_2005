@@ -22,6 +22,7 @@
         <%= link_to "Register", "/register" %>
       <% end %>
       <%= link_to "My Merchant Dashboard", "/dashboard" if current_merchant? %>
+      <%= link_to "My Admin Dashboard", "/dashboard" if current_admin? %>
 
     </nav>
     <% flash.each do |name, msg| %>
