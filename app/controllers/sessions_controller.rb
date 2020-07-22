@@ -28,4 +28,12 @@ class SessionsController < ApplicationController
       redirect_to "/login"
     end
   end
+
+  def destroy
+    # session[:user_id] = nil
+    # session[:cart] = 0
+    reset_session
+    redirect_to "/"
+    flash[:notice] = "You are logged out."
+  end
 end
