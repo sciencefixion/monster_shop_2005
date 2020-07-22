@@ -10,7 +10,7 @@ RSpec.describe "User profile show page" do
       click_button "Login"
     end
 
-    it "text" do
+    it "has users attributes on the profile show page" do
       visit "/profile"
 
       expect(current_path).to eq("/profile")
