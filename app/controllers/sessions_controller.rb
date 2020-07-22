@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def show
+    render file: "public/404.html" if !current_user
   end
 
   def new
@@ -10,7 +11,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    if user.authenticate(params[:password])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       if current_merchant?
         redirect_to "/merchant/dashboard"
@@ -23,7 +24,7 @@ class SessionsController < ApplicationController
         flash[:notice] = "You are now logged in."
       end
     else
-      flash[:error] = "You are not logged in."
+      flash[:error] = "You are not logged in. Username and/or password are incorrect"
       redirect_to "/login"
     end
   end
