@@ -13,11 +13,12 @@ RSpec.describe "User profile show page" do
     it "text" do
       visit "/profile"
 
+      expect(current_path).to eq("/profile")
       expect(page).to have_content("Name: #{@jim.name}")
       expect(page).to have_content("Address: #{@jim.address}")
       expect(page).to have_content("City: #{@jim.city}")
       expect(page).to have_content("State: #{@jim.state}")
-      expect(page).to have_content("zip: #{@jim.zip}")
+      expect(page).to have_content("Zip: #{@jim.zip}")
       expect(page).to_not have_content(@jim.password)
       expect(page).to have_link("Edit Profile")
     end

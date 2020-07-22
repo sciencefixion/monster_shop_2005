@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def show
+    @user = current_user
     render file: "public/404.html" if !current_user
   end
 
