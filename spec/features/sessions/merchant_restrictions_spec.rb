@@ -12,11 +12,9 @@ RSpec.describe "User restrictions", type: :feature do
                 click_on 'Login'
             end
     
-            visit "/admin"
+            visit "/admin/dashboard"
     
-            expect(page).to  have_content("Forbidden to access this route.")
-            visit "/admin/users"
-            expect(page).to  have_content("Forbidden to access this route.")
+            expect(page).to  have_content("The page you were looking for doesn't exist (404)")
         end
         
     end
@@ -33,6 +31,9 @@ RSpec.describe "User restrictions", type: :feature do
     
             visit "/cart"
             expect(page).to  have_content("Forbidden to access this route.")
-        end 
+            
+            visit "/merchant/dashboard"
+            expect(page).to  have_content("The page you were looking for doesn't exist (404)")
+        end  
     end
 end

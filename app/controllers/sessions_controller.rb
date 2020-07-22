@@ -4,7 +4,9 @@ class SessionsController < ApplicationController
   end
 
   def new
-
+    return redirect_to "/admin/dashboard" if current_user && current_user.admin?
+    return redirect_to "/merchant/dashboard" if current_user && current_user.merchant?
+    return redirect_to "/profile" if current_user
   end
 
   def create
