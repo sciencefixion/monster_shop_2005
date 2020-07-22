@@ -8,12 +8,12 @@ RSpec.describe "User can log out" do
 
   end
   it "can log a default user out" do
-    @jim = User.create(name: "Jim", address: "3455 LKV Rd.", city: "Denver", state: "CO", email: "test@test.com", zip: "80124", password: "123456")
+    jim = User.create(name: "Jim", address: "3455 LKV Rd.", city: "Denver", state: "CO", email: "test@test.com", zip: "80124", password: "123456")
     visit '/login'
     fill_in :email,	with: "test@test.com"
     fill_in :password,	with: "123456"
     click_button "Login"
-    expect(user.role).to eq("default")
+    expect(jim.role).to eq("default")
 
     visit "/items/#{@paper.id}"
     click_on "Add To Cart"
@@ -21,7 +21,7 @@ RSpec.describe "User can log out" do
     click_on "Add To Cart"
     expect(page).to have_content("Cart: 2")
 
-    click_on "Logout"
+    click_on "Log Out"
 
     expect(current_path).to eq("/")
     expect(page).to have_content("You are logged out")
