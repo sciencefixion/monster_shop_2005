@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
-      session[:user_id] = user.id
+      user_session(user.id)
       redirect_to "/profile"
       flash[:notice] = "You are now logged in."
     else
