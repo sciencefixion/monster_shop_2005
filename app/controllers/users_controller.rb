@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
         flash[:success] = "#{user.name} has been registered and logged in"
       else
-        flash[:error] = "User could not be created: #{user.errors.full_messages.each {|msg| msg}}" 
+        flash[:error] = "User could not be created: #{user.errors.full_messages.each {|msg| msg}}"
         redirect_to "/register"
       end
 

@@ -1,14 +1,4 @@
 require "rails_helper"
-# Story 3: As a default user
-# I see the same links as a visitor
-# Plus the following links
-# - a link to my profile page ("/profile")
-# - a link to log out ("/logout")
-#
-# Minus the following links
-# - I do not see a link to log in or register
-#
-# I also see text that says "Logged in as Mike Dao" (or whatever my name is)
 
 RSpec.describe "User navigation" do
   it "shows profile and logout links and does not show login or register links" do
@@ -27,8 +17,10 @@ RSpec.describe "User navigation" do
       expect(page).to have_link("Profile")
       expect(page).to_not have_link("Login")
       expect(page).to_not have_link("Register")
+      expect(page).to_not have_link("My Merchant Dashboard")
+      expect(page).to_not have_link("My Admin Dashboard")
     end
-
+    expect(user.default?).to be_truthy
     expect(page).to have_content("Logged in as Jim")
   end
 end

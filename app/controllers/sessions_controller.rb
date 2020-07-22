@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def show
-    
+
   end
 
   def new
@@ -10,13 +10,20 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
-      user_session(user.id)
-      redirect_to "/profile"
-      flash[:notice] = "You are now logged in."
+      session[:user_id] = user.id
+      if current_merchant?
+        redirect_to "/merchant/dashboard"
+        flash[:notice] = "You are now logged in."
+      elsif current_admin?
+        redirect_to "/admin/dashboard"
+        flash[:notice] = "You are now logged in."
+      else
+        redirect_to "/profile"
+        flash[:notice] = "You are now logged in."
+      end
     else
       flash[:error] = "You are not logged in."
       redirect_to "/login"
     end
-
   end
 end
