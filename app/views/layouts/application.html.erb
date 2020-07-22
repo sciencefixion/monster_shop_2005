@@ -21,6 +21,8 @@
         <%= link_to "Login", "/login" %>
         <%= link_to "Register", "/register" %>
       <% end %>
+      <%= link_to "My Merchant Dashboard", "/dashboard" if current_merchant? %>
+
     </nav>
     <% flash.each do |name, msg| %>
       <div class= "<%=name%>-flash">
