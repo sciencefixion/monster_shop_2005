@@ -18,7 +18,6 @@ RSpec.describe 'Site Navigation' do
 
       expect(current_path).to eq('/merchants')
     end
-
     it "I can see a cart indicator on all pages" do
       visit '/merchants'
 
@@ -40,7 +39,7 @@ RSpec.describe 'Site Navigation' do
       within 'nav' do
         expect(page).to have_link("Home")
       end
-      
+
     end
     it "displays a link to login and register" do
 
@@ -50,9 +49,20 @@ RSpec.describe 'Site Navigation' do
         expect(page).to have_link("Login")
         expect(page).to have_link("Register")
       end
-
-
     end
+    it "restricts visitor access from merchant, admin, and profile views" do
 
+
+
+      visit '/merchant/dashboard'
+
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+
+      visit '/admin/dashboard'
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+
+      visit '/profile'
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+    end
   end
 end
