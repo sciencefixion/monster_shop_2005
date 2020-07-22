@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+  before_action :cart_authorization
   def add_item
     item = Item.find(params[:item_id])
     cart.add_item(item.id.to_s)
@@ -20,5 +21,9 @@ class CartController < ApplicationController
     redirect_to '/cart'
   end
 
-
+  private 
+  def cart_authorization
+    render file: "/public/403" if current_admin?
+  end
+  
 end
