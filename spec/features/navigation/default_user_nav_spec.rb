@@ -20,7 +20,7 @@ RSpec.describe "User navigation" do
       expect(page).to_not have_link("My Merchant Dashboard")
       expect(page).to_not have_link("My Admin Dashboard")
     end
-
+    expect(user.default?).to be_truthy
     expect(page).to have_content("Logged in as Jim")
   end
 end

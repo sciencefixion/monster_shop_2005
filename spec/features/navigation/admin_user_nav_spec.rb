@@ -12,8 +12,6 @@ RSpec.describe "Admin navigation" do
     fill_in :password,	with: "123456"
     click_button "Login"
 
-    expect(current_path).to eq("/profile")
-
     within 'nav' do
       expect(page).to have_link("Log Out")
       expect(page).to have_link("Profile")
