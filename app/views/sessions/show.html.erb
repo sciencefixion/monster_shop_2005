@@ -1,5 +1,8 @@
 <p><%= "Logged in as #{current_user.name}" %></p>
 
+
+<%= link_to 'edit password', "/users/password/edit" %>
+
 <p>Name: <%= @user.name %></p>
 <p>Address: <%= @user.address %></p>
 <p>City: <%= @user.city %></p>

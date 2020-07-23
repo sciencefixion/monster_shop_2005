@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   post "/profile", to: "sessions#create"
   get "/logout", to: "sessions#destroy"
 
+  get "/users/password/edit", to: "passwords#edit"
+  patch "/users/password", to: "passwords#update"
+
   namespace :merchant do
     get "/dashboard", to: "dashboard#index"
   end
