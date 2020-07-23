@@ -21,9 +21,8 @@ class CartController < ApplicationController
     redirect_to '/cart'
   end
 
-  private 
+  private
   def cart_authorization
     render file: "/public/403" if current_admin?
   end
-  
 end

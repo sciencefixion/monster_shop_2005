@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  namespace :admin do
-    get "/", to: 'users#index'
-    get "/users", to: 'users#show'
-  end
+  root "welcome#index"
+
   get "/merchants", to: "merchants#index"
   get "/merchants/new", to: "merchants#new"
   get "/merchants/:id", to: "merchants#show"
@@ -39,10 +37,13 @@ Rails.application.routes.draw do
 
   get "/register", to: "users#new"
   post "/users", to: "users#create"
+  get "/profile/edit", to: "users#edit"
+  patch "/profile", to: "users#update"
 
   get "/profile", to: "sessions#show"
   get "/login", to: "sessions#new"
   post "/profile", to: "sessions#create"
+  get "/logout", to: "sessions#destroy"
 
   namespace :merchant do
     get "/dashboard", to: "dashboard#index"
