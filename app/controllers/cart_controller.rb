@@ -26,6 +26,10 @@ class CartController < ApplicationController
       cart.add_item(params[:item_id])
       return redirect_to cart_path
     end
+    if params[:type].eql?('ded')
+      cart.remove_item(params[:item_id])
+      return redirect_to cart_path
+    end
   end
   
 
