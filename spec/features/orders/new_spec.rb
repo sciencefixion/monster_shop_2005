@@ -67,4 +67,3 @@ RSpec.describe("New Order Page") do
     end
   end
 end
-#
