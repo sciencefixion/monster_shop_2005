@@ -1,28 +1,28 @@
 <%= form_tag "/users", method: :post do %>
-    <%= label_tag :name%>
+    <%= label_tag :name%><br/>
     <%= text_field_tag :name %>
-    <br/>
-    <%= label_tag :address%>
+    <br/><br/>
+    <%= label_tag :address%><br/>
     <%= text_field_tag :address %>
-    <br/>
-    <%= label_tag :city %>
+    <br/><br/>
+    <%= label_tag :city %><br/>
     <%= text_field_tag :city %>
-    <br/>
-    <%= label_tag :state %>
+    <br/><br/>
+    <%= label_tag :state %><br/>
     <%= text_field_tag :state %>
-    <br/>
-    <%= label_tag :zip%>
-        <%= text_field_tag :zip %>
-    <br/>
-    <%= label_tag :email%>
+    <br/><br/>
+    <%= label_tag :zip%><br/>
+    <%= text_field_tag :zip %>
+    <br/><br/>
+    <%= label_tag :email%><br/>
     <%= text_field_tag :email %>
-    <br/>
-    <%= label_tag :password %>
+    <br/><br/>
+    <%= label_tag :password %><br/>
     <%= password_field_tag :password %>
-    <br/>
-    <%= label_tag :confirm_password %>
+    <br/><br/>
+    <%= label_tag :confirm_password %><br/>
     <%= password_field_tag :confirm_password %>
-        <br/>
+    <br/><br/>
 
-        <%= submit_tag "submit" %>
+    <%= submit_tag "submit" %>
 <% end %>
