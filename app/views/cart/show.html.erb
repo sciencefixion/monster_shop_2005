@@ -30,9 +30,9 @@
       </td>
       <td>
         <center>
-          <p><%= link_to '+', "/cart/#{item.id}?type=add", method: :patch %></p>
+          <p><%= link_to_if quantity < item.inventory, '+', "/cart/#{item.id}?type=add", method: :patch %></p>
           <p><%=quantity%></p>
-          <p><%= link_to '-', "/cart/#{item.id}?type=ded", method: :patch %></p>
+          <p><%= link_to_if quantity > 0,  '-', "/cart/#{item.id}?type=ded", method: :patch %></p>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
         </center>
         </td>
