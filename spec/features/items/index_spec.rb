@@ -60,13 +60,6 @@ RSpec.describe "Items Index Page" do
     end
 
     it "does not allow disabled items to show in the items index" do
-      # User Story 17, Items Index Page
-      #
-      # As any kind of user on the system
-      # I can visit the items catalog ("/items")
-      # I see all items in the system except disabled items
-      #
-      # The item image is a link to that item's show page
       @lemarchand = Merchant.create(name: "LeMarchand Boxes", address: '1717 Rue de L\'Académie Royale', city: 'Paris', state: 'TX', zip: 75460)
 
       @lament = @lemarchand.items.create(name: "Lament Configuration", description: "We have such sights to show you!", price: 999, image: "https://vignette.wikia.nocookie.net/cenobite/images/f/fa/Lament_Configuration.jpg", active?:false, inventory: 6, enabled?:false)
@@ -76,17 +69,18 @@ RSpec.describe "Items Index Page" do
       expect(page).to_not have_link(@lament.name)
       expect(page).to_not have_content(@lament.description)
       expect(page).to_not have_content("Price: $#{@lament.price}")
-      save_and_open_page
       expect(page).to_not have_content("Inventory: #{@lament.inventory}")
       expect(page).to_not have_link(@lemarchand.name)
       expect(page).to_not have_css("img[src*='#{@lament.image}']")
 
     end
 
-    xit "links to an item's show page via its image" do
+    it "links to an item's show page via its image" do
       visit '/items'
 
-      click_on @dog_bone.image
+      within "#link-#{@dog_bone.id}" do
+        click_on "#{@dog_bone.name}"
+      end
 
       expect(current_path).to eq("/items/#{@dog_bone.id}")
     end
