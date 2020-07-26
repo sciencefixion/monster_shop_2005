@@ -10,7 +10,7 @@
       <section class = "grid-item" id= 'item-<%=item.id%>'>
         <h2> <%=link_to item.name, "/items/#{item.id}" %> </h2>
         <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
-        <div class="image-link" id= 'link-<%= item.id %>'>
+        <div class="image-links" id="item-image-<%= item.id %>">
           <%= link_to(image_tag("#{item.image}", :alt => "#{item.name}", :title => "#{item.name}"), "/items/#{item.id}") %>
         </div>
         <p> <%= item.description unless @merchant%> </p>
@@ -27,3 +27,9 @@
     <% end %>
   <% end %>
 </section>
+
+<p id= 'stats'>
+  <%= "Top 5 Most Popular Items: " %><br>
+
+  <%= "Bottom 5 Least Popular Items: " %><br>
+</p>
