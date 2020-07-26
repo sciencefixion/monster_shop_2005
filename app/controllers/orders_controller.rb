@@ -1,5 +1,9 @@
 class OrdersController <ApplicationController
 
+  def index
+    @orders = Order.all
+  end
+
   def new
 
   end
@@ -20,6 +24,7 @@ class OrdersController <ApplicationController
       end
       session.delete(:cart)
       redirect_to "/profile/orders"
+      flash[:notice] = "You order has been created"
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new

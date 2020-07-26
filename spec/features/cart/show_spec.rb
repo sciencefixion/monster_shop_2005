@@ -141,8 +141,8 @@ RSpec.describe 'Cart show' do
 
         expect(current_path).to eq("/profile/orders")
         expect(page).to have_content("You order has been created")
-        expect(page).to have_content(new_order)
         expect(page).to have_content("Cart: 0")
+        expect(page).to have_content(new_order)
       end
     end
   end
