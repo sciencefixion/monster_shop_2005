@@ -9,6 +9,7 @@ RSpec.describe "Items Index Page" do
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
 
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
+
       @dog_bone = @brian.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
     end
 
@@ -56,6 +57,32 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_link(@brian.name)
         expect(page).to have_css("img[src*='#{@dog_bone.image}']")
       end
+    end
+
+    it "does not allow disabled items to show in the items index" do
+      @lemarchand = Merchant.create(name: "LeMarchand Boxes", address: '1717 Rue de L\'Académie Royale', city: 'Paris', state: 'TX', zip: 75460)
+
+      @lament = @lemarchand.items.create(name: "Lament Configuration", description: "We have such sights to show you!", price: 999, image: "https://vignette.wikia.nocookie.net/cenobite/images/f/fa/Lament_Configuration.jpg", active?:false, inventory: 6, enabled?:false)
+
+      visit '/items'
+
+      expect(page).to_not have_link(@lament.name)
+      expect(page).to_not have_content(@lament.description)
+      expect(page).to_not have_content("Price: $#{@lament.price}")
+      expect(page).to_not have_content("Inventory: #{@lament.inventory}")
+      expect(page).to_not have_link(@lemarchand.name)
+      expect(page).to_not have_css("img[src*='#{@lament.image}']")
+
+    end
+
+    it "links to an item's show page via its image" do
+      visit '/items'
+
+      within "#link-#{@dog_bone.id}" do
+        click_on "#{@dog_bone.name}"
+      end
+
+      expect(current_path).to eq("/items/#{@dog_bone.id}")
     end
   end
 end
