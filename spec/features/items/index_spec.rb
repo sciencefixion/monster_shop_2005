@@ -96,6 +96,7 @@ RSpec.describe "Items Index Page" do
       # - the bottom 5 least popular items, plus the quantity bought
       #
       # "Popularity" is determined by total quantity of that item ordered
+      jim = User.create(name: "Jim", address: "3455 LKV", city: "Hell", state: "MI", email: "test@test.com", zip: "56765", password: "123456")
 
       @lemarchand = Merchant.create(name: "LeMarchand Boxes", address: '1717 Rue de L\'Académie Royale', city: 'Paris', state: 'TX', zip: 75460)
 
@@ -110,11 +111,11 @@ RSpec.describe "Items Index Page" do
                       item9 = @lemarchand.items.create(name: "Nine", description: "We have such sights to show you!", price: 10, image: "https://vignette.wikia.nocookie.net/cenobite/images/f/fa/Lament_Configuration.jpg", inventory: 15 )
                         item10 = @lemarchand.items.create(name: "Ten", description: "We have such sights to show you!", price: 10, image: "https://vignette.wikia.nocookie.net/cenobite/images/f/fa/Lament_Configuration.jpg", inventory: 15 )
 
-      order1 = Order.create(name: "Homer", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
-        order2 = Order.create(name: "Ned", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
-          order3 = Order.create(name: "Moe", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
-            order4 = Order.create(name: "Bart", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
-              order5 = Order.create(name: "Lisa", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
+      order1 = jim.orders.create(name: "Homer", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
+        order2 = jim.orders.create(name: "Ned", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
+          order3 = jim.orders.create(name: "Moe", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
+            order4 = jim.orders.create(name: "Bart", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
+              order5 = jim.orders.create(name: "Lisa", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
 
       order1.item_orders.create(item: item1, price: item1.price, quantity: 10)
         order2.item_orders.create(item: item2, price: item2.price, quantity: 9)
