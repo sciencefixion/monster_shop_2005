@@ -8,6 +8,7 @@ class CartController < ApplicationController
   end
 
   def show
+    # require "pry"; binding.pry
     @items = cart.items
   end
 

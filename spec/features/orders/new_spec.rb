@@ -7,6 +7,12 @@ RSpec.describe("New Order Page") do
       @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
       @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
+      bert = User.create(name: "Bert", address: "123 Sesame St.", city: "NYC", state: "New York", zip: "10001", email: "bert@test.com", password: "123456")
+      visit '/login'
+      fill_in :email,	with: bert.email
+      fill_in :password,	with: bert.password
+      click_button "Login"
+
       visit "/items/#{@paper.id}"
       click_on "Add To Cart"
       visit "/items/#{@paper.id}"
