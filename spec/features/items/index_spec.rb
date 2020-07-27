@@ -87,16 +87,15 @@ RSpec.describe "Items Index Page" do
     end
 
     it "displays statistics for the 5 most and least popular items" do
-
-          #     User Story 18, Items Index Page Statistics
-          #
-          # As any kind of user on the system
-          # When I visit the items index page ("/items")
-          # I see an area with statistics:
-          # - the top 5 most popular items by quantity purchased, plus the quantity bought
-          # - the bottom 5 least popular items, plus the quantity bought
-          #
-          # "Popularity" is determined by total quantity of that item ordered
+      #     User Story 18, Items Index Page Statistics
+      #
+      # As any kind of user on the system
+      # When I visit the items index page ("/items")
+      # I see an area with statistics:
+      # - the top 5 most popular items by quantity purchased, plus the quantity bought
+      # - the bottom 5 least popular items, plus the quantity bought
+      #
+      # "Popularity" is determined by total quantity of that item ordered
 
       @lemarchand = Merchant.create(name: "LeMarchand Boxes", address: '1717 Rue de L\'Académie Royale', city: 'Paris', state: 'TX', zip: 75460)
 
@@ -112,31 +111,40 @@ RSpec.describe "Items Index Page" do
                         item10 = @lemarchand.items.create(name: "Ten", description: "We have such sights to show you!", price: 10, image: "https://vignette.wikia.nocookie.net/cenobite/images/f/fa/Lament_Configuration.jpg", inventory: 15 )
 
       order1 = Order.create(name: "Homer", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
-        order2 = Order.create(name: "Ned", address: "", city: "Springfield", state: "IL", zip: "12345")
-          order3 = Order.create(name: "Moe", address: "", city: "Springfield", state: "IL", zip: "12345")
+        order2 = Order.create(name: "Ned", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
+          order3 = Order.create(name: "Moe", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
             order4 = Order.create(name: "Bart", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
               order5 = Order.create(name: "Lisa", address: "1234 What St.", city: "Springfield", state: "IL", zip: "12345")
 
-      10.times { ItemOrder.create(item: item1, order: order1) }
-        9.times { ItemOrder.create(item: item2, order: order2) }
-          8.times { ItemOrder.create(item: item3, order: order3) }
-            7.times { ItemOrder.create(item: item4, order: order4) }
-              6.times { ItemOrder.create(item: item5, order: order5) }
-                5.times { ItemOrder.create(item: item6, order: order1) }
-                  4.times { ItemOrder.create(item: item7, order: order2) }
-                    3.times { ItemOrder.create(item: item8, order: order3) }
-                      2.times { ItemOrder.create(item: item9, order: order4) }
-                        1.times { ItemOrder.create(item: item10, order: order5) }
+      order1.item_orders.create(item: item1, price: item1.price, quantity: 10)
+        order2.item_orders.create(item: item2, price: item2.price, quantity: 9)
+            order3.item_orders.create(item: item3, price: item3.price, quantity: 8)
+                order4.item_orders.create(item: item4, price: item4.price, quantity: 7)
+                    order5.item_orders.create(item: item5, price: item5.price, quantity: 6)
+                        order1.item_orders.create(item: item6, price: item6.price, quantity: 5)
+                            order2.item_orders.create(item: item7, price: item7.price, quantity: 4)
+                                order3.item_orders.create(item: item8, price: item8.price, quantity: 3)
+                                    order4.item_orders.create(item: item9, price: item9.price, quantity: 2)
+                                        order5.item_orders.create(item: item10, price: item10.price, quantity: 1)
 
       visit '/items'
 
       within "#stats" do
         expect(page).to have_content("Top 5 Most Popular Items:")
-        #   #expect items and quantity
+        expect(page).to have_content("Lament Configuration, units purchased: 10")
+        expect(page).to have_content("Two, units purchased: 9")
+        expect(page).to have_content("Three, units purchased: 8")
+        expect(page).to have_content("Four, units purchased: 7")
+        expect(page).to have_content("Five, units purchased: 6")
 
         expect(page).to have_content("Bottom 5 Least Popular Items:")
-        #   #expect items and quantity
+        expect(page).to have_content("Six, units purchased: 5")
+        expect(page).to have_content("Seven, units purchased: 4")
+        expect(page).to have_content("Eight, units purchased: 3")
+        expect(page).to have_content("Nine, units purchased: 2")
+        expect(page).to have_content("Ten, units purchased: 1")
       end
+
 
     end
   end

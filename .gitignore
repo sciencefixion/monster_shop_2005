@@ -14,7 +14,7 @@ coverage
 !/log/.keep
 !/tmp/.keep
 
-/.DS_Store
+.DS_Store
 
 
 /node_modules
