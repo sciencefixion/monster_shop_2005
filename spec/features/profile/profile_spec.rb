@@ -10,7 +10,7 @@ RSpec.describe 'User profile page' do
     @bert = User.create(name: "Bert", address: "123 Sesame St.", city: "NYC", state: "New York", zip: "10001", email: "bert@test.com", password: "123456")
 
     visit '/login'
-    fill_in :email,	with: "test@test.com"
+    fill_in :email,	with: "bert@test.com"
     fill_in :password,	with: "123456"
     click_button "Login"
 
@@ -20,6 +20,10 @@ RSpec.describe 'User profile page' do
     click_on "Add To Cart"
     visit "/items/#{@pencil.id}"
     click_on "Add To Cart"
+
+    visit "/cart"
+
+    click_on "Checkout"
 
     fill_in :name, with: @bert.name
     fill_in :address, with: @bert.address
@@ -36,7 +40,7 @@ RSpec.describe 'User profile page' do
 
     visit "/profile"
 
-    expect(page).to have_link("My Orders")
+    click_on "My Orders"
 
     expect(current_path).to eq("/profile/orders")
   end
