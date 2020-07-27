@@ -25,6 +25,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'table_print', '~> 1.5', '>= 1.5.7'
+  gem "factory_bot_rails"
+  gem 'faker'
 end
 
 group :development do
