@@ -24,6 +24,7 @@ group :development, :test do
   gem 'pry'
   gem 'simplecov'
   gem 'shoulda-matchers'
+  gem 'table_print', '~> 1.5', '>= 1.5.7'
 end
 
 group :development do

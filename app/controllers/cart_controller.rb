@@ -22,6 +22,18 @@ class CartController < ApplicationController
     redirect_to '/cart'
   end
 
+  def update
+    if params[:type].eql?('add')
+      cart.add_item(params[:item_id])
+      return redirect_to cart_path
+    end
+    if params[:type].eql?('ded')
+      cart.remove_item(params[:item_id])
+      return redirect_to cart_path
+    end
+  end
+  
+
   private
   def cart_authorization
     render file: "/public/403" if current_admin?
