@@ -1,8 +1,12 @@
 <h1>Orders</h1>
 
 <% @orders.each do |order| %>
-<%= link_to order.id, "/orders/#{order.id}" %>
-<%= order.created_at %>
-<%= number_to_currency(order.grandtotal) %>
-<%= order.status %>
+  <%= link_to order.id, "/orders/#{order.id}" %>
+  <%= order.created_at %>
+  <%= order.date_created %>
+  <%= order.date_last_updated %>
+  <%= order.status %>
+  <%= order.total_quantity_of_items %>
+  <%= order.grandtotal %>
+  <%= number_to_currency(order.grandtotal) %>
 <% end %>
