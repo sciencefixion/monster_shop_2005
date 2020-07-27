@@ -9,4 +9,5 @@
 <p>State: <%= @user.state %></p>
 <p>Zip: <%= @user.zip %></p>
 
+<%= link_to "My Orders", "/profile/orders" if !current_admin? %>
 <%= link_to "Edit Profile", "/profile/edit" %>
