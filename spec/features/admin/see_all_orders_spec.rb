@@ -68,15 +68,63 @@ RSpec.describe "see all orders" do
         end
         
     end
+
+    describe "Admin can 'ship' an order" do
+        before :each do
+            @admin_user = create(:user , email: 'test@test1.com',  role: 2 )
+            @default_user = create(:user)
+        
+            @order_1 = create(:order , user: @default_user, status: 1)
+            @order_2 = create(:order , user: @default_user)
+            @order_3 = create(:order , user: @default_user, status: 2)
+            @order_4 = create(:order , user: @default_user, status: 1)
+            @order_5 = create(:order , user: @default_user, status: 3)
+            @order_6 = create(:order , user: @default_user)
+            @order_7 = create(:order , user: @default_user, status: 1)
+            
+            visit '/login'
+    
+            within  "form" do
+                fill_in :email,	with: "test@test1.com" 
+                fill_in :password,	with: "123456" 
+                click_on 'Login'
+            end
+            
+        end
+        
+        it "has a button changing the order status" do
+            visit admin_dashboard_path
+            
+            within "#order-#{@order_1.id}" do
+                expect(page).to  have_link("update to shipped")
+            end
+            within "#order-#{@order_4.id}" do
+                expect(page).to  have_link("update to shipped")
+            end
+            
+            within "#order-#{@order_2.id}" do
+                expect(page).to_not  have_link("update to shipped")
+            end
+            within "#order-#{@order_3.id}" do
+                expect(page).to_not  have_link("update to shipped")
+            end
+
+        end
+        it "admin can change status to shipped" do
+            visit admin_dashboard_path
+            
+            within "#order-#{@order_1.id}" do
+                click_on "update to shipped"
+            end
+            within "#order-#{@order_1.id}" do
+                expect(page).to  have_content("Order status: shipped")
+            end
+
+        end
+        
+    end
+    
     
 end
 
-
-# User Story 33, Admin can "ship" an order
-
-# As an admin user
-# When I log into my dashboard, "/admin"
-# Then I see any "packaged" orders ready to ship.
-# Next to each order I see a button to "ship" the order.
-# When I click that button for an order, the status of that order changes to "shipped"
 # And the user can no longer "cancel" the order.
