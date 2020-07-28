@@ -10,6 +10,18 @@ class Order <ApplicationRecord
   def grandtotal
     item_orders.sum('price * quantity')
   end
+
+  def date_created
+    created_at.strftime("%d %B %Y")
+  end
+
+  def date_last_updated
+    updated_at.strftime("%d %B %Y %H:%M")
+  end
+
+  def total_quantity_of_items
+    items.count
+  end
 end
 
 # Add fullfilled and unfullfilled in the item_orders

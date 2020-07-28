@@ -48,9 +48,8 @@ RSpec.describe "User profile displays orders" do
     fill_in :state, with: @bert.state
     fill_in :zip, with: @bert.zip
     click_button "Create Order"
-
-    @order1 = current_user.orders.first
-    @order2 = current_user.orders.last
+    @order1 = Order.first
+    @order2 = Order.last
   end
 
   it "text" do
