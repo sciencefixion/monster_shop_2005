@@ -4,6 +4,8 @@ class ItemOrder <ApplicationRecord
   belongs_to :item
   belongs_to :order
 
+  enum status: [:pending, :fulfilled, :unfulfilled]
+
   def subtotal
     price * quantity
   end
