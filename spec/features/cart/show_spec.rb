@@ -148,7 +148,7 @@ RSpec.describe 'Cart show' do
         expect(page).to have_content("You order has been created")
         expect(page).to have_content("Cart: 0")
         expect(page).to have_content(new_order.id)
-        expect(page).to have_content(new_order.created_at)
+        expect(page).to have_content(new_order.date_created)
         expect(page).to have_content(new_order.grandtotal)
         expect(page).to have_content(new_order.status)
       end
