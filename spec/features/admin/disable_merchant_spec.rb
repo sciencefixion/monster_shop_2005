@@ -8,7 +8,7 @@ RSpec.describe "Admin disables a merchant account" do
 
         @merchant_1 = create(:merchant)
         @merchant_2 = create(:merchant)
-        @merchant_3 = create(:merchant)
+        @merchant_3 = create(:merchant, enabled: false)
         @merchant_4 = create(:merchant)
 
         @item_1 = create(:item, merchant: @merchant_4)
@@ -64,5 +64,22 @@ RSpec.describe "Admin disables a merchant account" do
         end
         expect(page).to  have_content("#{@merchant_1.name} has been disabled")
     end
+    
+    it "has enabled link when disabled" do
+        visit "/admin/merchants"
         
+        within "#merchant-#{@merchant_3.id}" do
+            expect(page).to  have_link("enable")
+            click_on "enable"
+        end
+        expect(page).to  have_content("#{@merchant_3.name} has been enabled")
+
+        visit "/merchants/#{@merchant_3.id}/items"
+
+        @merchant_3.items.each do |item|
+            within "#item-#{item.id}" do
+                expect(page).to have_content('Active') 
+            end
+        end
+    end    
 end
