@@ -12,9 +12,9 @@
 <% end %>
 <% @orders.each do |order| %>
     <div id="order-<%= order.id %>">
-        <p>Order_id: <%= order.id %></p>
-        <p>Order_id: <%= order.user.name %></p>
-        <p><%= order.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%B %d  %A %Y") %> </p>
+        <p>Order id: <%= order.id %></p>
+        <%= link_to "Client: #{order.user.name} ", "/admin/users/#{order.user.id}" %>
+        <p>Order was made on: <%= order.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%B %d %Y") %> </p>
     </div>
     <hr>
 <% end %>
