@@ -31,7 +31,7 @@ RSpec.describe "see all orders" do
             expect(current_path).to  eq("/admin/dashboard")
             within "#order-#{@order_1.id}" do
                 expect(page).to  have_content(@order_1.id)
-                expect(page).to  have_content(@order_1.user.name)
+                expect(page).to  have_link(@order_1.user.name)
                 # expect(page).to  have_content(@order_1.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%B %d  %A %Y"))
             end
         end
@@ -49,6 +49,22 @@ RSpec.describe "see all orders" do
             expect(page).to have_content(@order_6.user.name)  
             
             expect(page).to_not have_content(@order_1.id)  
+        end
+
+        it "Go to admin users profile" do
+            
+            expect(current_path).to  eq("/admin/dashboard")
+            within "#order-#{@order_1.id}" do
+                click_on "Client: #{@order_1.user.name}"
+            end
+
+            expect(current_path).to  eq("/admin/users/#{@order_1.user.id}")
+
+            expect(page).to have_content(@order_1.user.name) 
+            expect(page).to have_content(@order_1.user.address) 
+            expect(page).to have_content(@order_1.user.city) 
+            expect(page).to have_content(@order_1.user.state) 
+            expect(page).to have_content(@order_1.user.zip) 
         end
         
     end
