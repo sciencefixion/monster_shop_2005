@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require "factory_bot_rails"
+include FactoryBot::Syntax::Methods
 
 Merchant.destroy_all
 Item.destroy_all
@@ -19,3 +21,14 @@ tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never po
 #dog_shop items
 pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
 dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
+
+@admin_user = create(:user , email: 'test@test1.com',  role: 2 )
+@default_user = create(:user)
+
+@order_1 = create(:order , user: @default_user, status: 1)
+@order_2 = create(:order , user: @default_user)
+@order_3 = create(:order , user: @default_user, status: 2)
+@order_4 = create(:order , user: @default_user, status: 1)
+@order_5 = create(:order , user: @default_user, status: 3)
+@order_6 = create(:order , user: @default_user)
+@order_7 = create(:order , user: @default_user, status: 1)
