@@ -31,7 +31,13 @@ class OrdersController <ApplicationController
     end
   end
 
+  def update
+    order = Order.find(params[:id])
+    order.update(status: 2) if order.status == 'packaged'
 
+    redirect_to admin_dashboard_path
+  end
+  
   private
 
   def order_params
