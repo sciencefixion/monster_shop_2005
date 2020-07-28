@@ -25,7 +25,6 @@ RSpec.describe "Merchant dashboard show page" do
     expect(page).to have_content(@merchant_user.merchant.city)
     expect(page).to have_content(@merchant_user.merchant.state)
     expect(page).to have_content(@merchant_user.merchant.zip)
-    save_and_open_page
   end
 
 end
