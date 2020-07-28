@@ -1,1 +1,21 @@
-<p>Logged in as <%= @user.name %></p>
+<p>Logged in as <%= current_user.name %></p>
+<%= form_tag "/admin/dashboard", method: :get do %>
+    <select name="status" id="status">
+        <option value>select</option>
+        <option value="0">pending</option>
+        <option value="1">packaged</option>
+        <option value="2">shipped</option>
+        <option value="3">cancelled</option>
+    </select>
+
+<%= submit_tag "find" %>
+<% end %>
+<% @orders.each do |order| %>
+    <div id="order-<%= order.id %>">
+        <p>Order_id: <%= order.id %></p>
+        <p>Order_id: <%= order.user.name %></p>
+        <p><%= order.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%B %d  %A %Y") %> </p>
+    </div>
+    <hr>
+<% end %>
+
