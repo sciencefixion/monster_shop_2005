@@ -1,7 +1,7 @@
 <h1>Orders</h1>
 
 <% @orders.each do |order| %>
-  <p>Order number: <%= link_to order.id, "/orders/#{order.id}" %></p>
+  <p>Order number: <%= link_to order.id, "/profile/orders/#{order.id}" %></p>
   <p>Order made on: <%= order.date_created %></p>
   <p>Last updated: <%= order.date_last_updated %></p>
   <p>Order Status: <%= order.status %></p>
