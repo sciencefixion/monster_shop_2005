@@ -1,5 +1,8 @@
 class Admin::DashboardController < Admin::BaseAdminController
   def index
-    @user = User.find(session[:user_id])
+    if params[:status] && !params[:status].empty?
+      return @orders = Order.where(status: params[:status]) 
+    end 
+    @orders = Order.all
   end
 end
