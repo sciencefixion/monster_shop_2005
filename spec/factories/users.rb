@@ -1,5 +1,6 @@
 FactoryBot.define do
     factory :user do
+      merchant
       name { Faker::FunnyName.name }
       address  { Faker::Address.street_address }
       city { Faker::Address.city }
@@ -11,4 +12,3 @@ FactoryBot.define do
       end
     end
   end
-  
