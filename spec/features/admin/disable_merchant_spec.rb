@@ -44,7 +44,7 @@ RSpec.describe "Admin disables a merchant account" do
         
     end
 
-    it "Admin disables a merchant account" do
+    it "page has disable buttons" do
         visit "/admin/merchants"
 
         within "#merchant-#{@merchant_1.id}" do
@@ -55,11 +55,14 @@ RSpec.describe "Admin disables a merchant account" do
             expect(page).to  have_link("disable")
         end
     end
+
+    it "Admin disables a merchant account" do
+        visit "/admin/merchants"
+
+        within "#merchant-#{@merchant_1.id}" do
+            click_on "disable"
+        end
+        expect(page).to  have_content("#{@merchant_1.name} has been disabled")
+    end
         
 end
-
-# User Story 38, Admin disables a merchant account
-
-# When I click on the "disable" button
-# I am returned to the admin's merchant index page where I see that the merchant's account is now disabled
-# And I see a flash message that the merchant's account is now disabled
