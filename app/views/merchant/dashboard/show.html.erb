@@ -1,0 +1,32 @@
+<p>Logged in as <%= @user.name %></p>
+
+<section align = "center">
+  <h1><%= @user.merchant.name %></h1>
+  <h2>Address:</h2>
+  <%= @user.merchant.address %><br>
+  <%= @user.merchant.city    %><br>
+  <%= @user.merchant.state   %><br>
+  <%= @user.merchant.zip     %><br>
+</section>
+
+<section class = "pending-orders">
+  <h2 align = "center">Pending Orders:</h2>
+  <table align = "center">
+    <tr>
+      <th>Order ID:</th>
+      <th>Date Created:</th>
+      <th>Date last Updated:</th>
+      <th>Total:</th>
+    </tr>
+    <% @user.merchant.pending_orders.each do |order| %>
+      <tr>
+      <section>
+        <td><p><%= link_to order.id, "/merchant/orders/#{order.id}" %></p></td>
+        <td><p><%= order.date_created %></p></td>
+        <td><p><%= order.date_last_updated %></p></td>
+        <td><p><%= order.grandtotal %></p></td>
+      </section>
+      </tr>
+    <% end %>
+  </table>
+</section>
