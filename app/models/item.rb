@@ -24,4 +24,8 @@ class Item <ApplicationRecord
   def no_orders?
     item_orders.empty?
   end
+
+  def quantity_ordered
+    item_orders.sum(:quantity)
+  end
 end

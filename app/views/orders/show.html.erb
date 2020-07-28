@@ -1,6 +1,6 @@
 <section class = "shipping-address">
-  <h1 align = "center">Shipping Info</h1>
-  <table>
+  <h1 align = "center">Shipping Information:</h1>
+  <table align = "center">
     <tr>
       <th>Name</th>
       <th>Address</th>
@@ -18,23 +18,36 @@
   </table>
 </section>
 
-<h1 align = "center">Order Info</h1>
+<h2 align = "center">Order Information:</h2>
 <center>
   <table>
     <tr>
+      <th>Image</th>
       <th>Item</th>
+      <th>Description</th>
       <th>Sold By</th>
       <th>Price</th>
       <th>Quantity</th>
       <th>Subtotal</th>
     </tr>
+
+  <section>
+    <p>Order ID:<%= @order.id %></p>
+    <p>Order made on: <%= @order.date_created %></p>
+    <p>Last updated: <%= @order.date_last_updated %></p>
+    <p>Order Status: <%= @order.status %></p>
+  </section>
+
   <% @order.item_orders.each do |item_order|%>
     <tr>
     <section id = "item-<%=item_order.item_id%>">
+        <td><p><%= image_tag(item_order.item.image, size: "40x40") %></p></td>
         <td><p><%=link_to item_order.item.name, "/items/#{item_order.item_id}"%></p></td>
+        <td><p><%= item_order.item.description %></p></td>
         <td><p><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}"%></p></td>
         <td><p><%= number_to_currency(item_order.price)%></p></td>
-        <td><p><%= item_order.quantity%></p></td>
+
+        <td><p align = "center"><%= item_order.item.quantity_ordered %></p></td>
         <td><p><%= number_to_currency(item_order.subtotal)%></p></td>
       </section>
     </tr>
@@ -42,6 +55,7 @@
 </table>
 
 <section id="grandtotal">
+  <p>Total item ordered: <%= @order.total_quantity_of_items %></p>
   <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
 </section>
 <section id="datecreated">

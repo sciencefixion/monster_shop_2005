@@ -29,6 +29,10 @@ RSpec.describe "User views an oder show page" do
     click_on "Add To Cart"
     visit "/items/#{@tire.id}"
     click_on "Add To Cart"
+    visit "/items/#{@tire.id}"
+    click_on "Add To Cart"
+    visit "/items/#{@tire.id}"
+    click_on "Add To Cart"
     visit "/cart"
     click_on "Checkout"
     fill_in :name, with: @bert.name
@@ -41,33 +45,32 @@ RSpec.describe "User views an oder show page" do
 
     @order1 = Order.first
     @order2 = Order.last
+
   end
 
   it "text" do
     visit "/profile/orders"
 
     click_on "#{@order2.id}"
-
+    save_and_open_page
     expect(current_path).to eq("/profile/orders/#{@order2.id}")
-
     expect(page).to have_content(@order2.id)
     expect(page).to have_content(@order2.date_created)
     expect(page).to have_content(@order2.date_last_updated)
     expect(page).to have_content(@order2.status)
     expect(page).to have_content(@paper.name)
     expect(page).to have_content(@paper.description)
-    expect(page).to have_content(@paper.thumbnail)
-    expect(page).to have_content(@paper.quantity)
+    # expect(page).to have_content(@paper.image)
+    expect(page).to have_content(@paper.quantity_ordered)
     expect(page).to have_content(@paper.price)
-    expect(page).to have_content(@paper.subtotal)
+    expect(page).to have_content("$100.00")
     expect(page).to have_content(@tire.name)
     expect(page).to have_content(@tire.description)
-    expect(page).to have_content(@tire.thumbnail)
-    expect(page).to have_content(@tire.quantity)
+    # expect(page).to have_content(@tire.image)
+    expect(page).to have_content(@tire.quantity_ordered)
     expect(page).to have_content(@tire.price)
-    expect(page).to have_content(@tire.subtotal)
+    expect(page).to have_content("$300.00")
     expect(page).to have_content(@order2.total_quantity_of_items)
     expect(page).to have_content(@order2.grandtotal)
-
   end
 end

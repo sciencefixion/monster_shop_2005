@@ -145,19 +145,10 @@ RSpec.describe 'Cart show' do
         expect(page).to have_content("You order has been created")
         expect(page).to have_content("Cart: 0")
         expect(page).to have_content(new_order.id)
-        expect(page).to have_content(new_order.created_at)
+        expect(page).to have_content(new_order.date_created)
         expect(page).to have_content(new_order.grandtotal)
         expect(page).to have_content(new_order.status)
       end
     end
   end
 end
-
-#
-#
-# An order is created in the system, which has a status of "pending"
-# That order is associated with my user
-# I am taken to my orders page ("/profile/orders")
-# I see a flash message telling me my order was created
-# I see my new order listed on my profile orders page
-# My cart is now empty

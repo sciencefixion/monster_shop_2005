@@ -16,12 +16,10 @@ class Order <ApplicationRecord
   end
 
   def date_last_updated
-    updated_at.strftime("%d %B %Y %H:%M")
+    updated_at.strftime("%d %B %Y")
   end
 
   def total_quantity_of_items
     items.count
   end
 end
-
-# Add fullfilled and unfullfilled in the item_orders
