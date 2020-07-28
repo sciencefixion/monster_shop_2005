@@ -20,8 +20,8 @@ RSpec.describe "Merchant dashboard show page" do
   end
   it "as a merchant employee" do
     visit "/merchant"
-    expect(page).to have_content(name of merchant i work for)
-    expect(page).to have_content(address of merchant i work for)
+    expect(page).to have_content(@merchant_user.merchant.name)
+    expect(page).to have_content(@merchant_user.merchant.address)
   end
 
 end
