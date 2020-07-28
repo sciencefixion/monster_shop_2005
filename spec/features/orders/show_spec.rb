@@ -50,7 +50,7 @@ RSpec.describe "User views an oder show page" do
     visit "/profile/orders"
 
     click_on "#{@order2.id}"
-    
+
     expect(current_path).to eq("/profile/orders/#{@order2.id}")
     expect(page).to have_content(@order2.id)
     expect(page).to have_content(@order2.date_created)
@@ -72,5 +72,3 @@ RSpec.describe "User views an oder show page" do
     expect(page).to have_content(@order2.grandtotal)
   end
 end
-
-#namespace user as profile for profile orders
