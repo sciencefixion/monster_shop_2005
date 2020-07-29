@@ -14,7 +14,6 @@ RSpec.describe "Admin navigation" do
 
     within 'nav' do
       expect(page).to have_link("Log Out")
-      expect(page).to have_link("Profile")
       expect(page).to have_link("My Admin Dashboard")
       expect(page).to_not have_link("Login")
       expect(page).to_not have_link("Register")

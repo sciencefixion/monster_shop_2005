@@ -1,0 +1,68 @@
+<h1>Order Number: <%= @order.id %></h1>
+<p>Order Status: <%= @order.status %></p>
+<p id="cancel-order-<%= @order.id %>"><%= link_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %></p>
+<section class = "shipping-address">
+  <h1 align = "center">Shipping Information:</h1>
+  <table align = "center">
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+    </tr>
+    <tr>
+      <td><p><%= @order.name %> </p></td>
+      <td><p><%= @order.address %> </p></td>
+      <td><p><%= @order.city %> </p></td>
+      <td><p><%= @order.state %> </p></td>
+      <td><p><%= @order.zip %> </p></td>
+    </tr>
+  </table>
+</section>
+
+<h2 align = "center">Order Information:</h2>
+<center>
+
+  <section>
+    <p>Order ID:<%= @order.id %></p>
+    <p>Order made on: <%= @order.date_created %></p>
+    <p>Last updated: <%= @order.date_last_updated %></p>
+    <p>Order Status: <%= @order.status %></p>
+  </section>
+
+  <table>
+    <tr>
+      <th>Image</th>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Sold By</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+
+
+  <% @order.item_orders.each do |item_order|%>
+    <tr>
+    <section id = "item-<%= item_order.item_id %>">
+        <td><p><%= link_to image_tag(item_order.item.image, size: "40x40"), "/items/#{item_order.item_id}" %></p></td>
+        <td><p><%= link_to item_order.item.name, "/items/#{item_order.item_id}" %></p></td>
+        <td><p><%= item_order.item.description %></p></td>
+        <td><p><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}" %></p></td>
+        <td><p><%= number_to_currency(item_order.price) %></p></td>
+
+        <td><p align = "center"><%= item_order.quantity %></p></td>
+        <td><p><%= number_to_currency(item_order.subtotal) %></p></td>
+      </section>
+    </tr>
+  <% end %>
+</table>
+
+<section id="grandtotal">
+  <p>Total item ordered: <%= @order.total_quantity_of_items %></p>
+  <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
+</section>
+<section id="datecreated">
+  <p> <%= @order.created_at%></p>
+</section>
