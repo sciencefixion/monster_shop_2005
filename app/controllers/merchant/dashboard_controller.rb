@@ -1,5 +1,8 @@
 class Merchant::DashboardController < Merchant::BaseMerchantController
   def show
-    @user = User.find(session[:user_id])
+    @user = current_user
+  end
+
+  def item_index
   end
 end
