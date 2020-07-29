@@ -45,9 +45,7 @@ RSpec.describe "Merchant sees an order show page" do
     expect(page).to have_content(item_1.quantity_ordered)
     expect(page).to have_content(item_2.quantity_ordered)
     expect(page).to_not have_content(item_3.name)
-    expect(page).to_not have_content(item_3.price)
-    expect(page).to_not have_css("img[src*='#{item_3.image}']")
-    expect(page).to_not have_content(item_3.quantity_ordered)
+    save_and_open_page
   end
 end
 

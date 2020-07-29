@@ -1,14 +1,32 @@
-<%= @order.user.name %>
-<%= @order.address %>
-<%= @order.city %>
-<%= @order.state %>
-<%= @order.zip %>
+<section align = "center">
+  <h3>Name on order: <%= @order.user.name %></h3>
+  <h2>Address on order:</h2>
+  <p><%= @order.address %></p>
+  <p><%= @order.city %></p>
+  <p><%= @order.state %></p>
+  <p><%= @order.zip %></p>
+</section>
 
-<% @order.items.each do |item| %>
-  <% if item.merchant_id == current_user.merchant.id %>
-    <%= link_to item.name, "/items/#{item.id}" %>
-    <%= image_tag(item.image, size: "40x40") %>
-    <%= item.price %>
-    <%= item.quantity_ordered %>
+<section class = "items-in-order">
+  <h2 align = "center">Items:</h2>
+  <table align = "center">
+    <tr>
+      <th>Item name:</th>
+      <th>Image:</th>
+      <th>Price:</th>
+      <th>Quantity:</th>
+    </tr>
+  <% @order.items.each do |item| %>
+    <tr>
+    <section>
+    <% if item.merchant_id == current_user.merchant.id %>
+      <td><p><%= link_to item.name, "/items/#{item.id}" %></p></td>
+      <td><p><%= image_tag(item.image, size: "40x40") %></p></td>
+      <td><p><%= number_to_currency(item.price) %></p></td>
+      <td><p><%= item.quantity_ordered %></p></td>
+    <% end %>
+    </section>
+    </tr>
   <% end %>
-<% end %>
+  </table>
+</section>
