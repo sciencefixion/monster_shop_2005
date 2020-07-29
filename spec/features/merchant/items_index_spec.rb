@@ -22,14 +22,15 @@ RSpec.describe "Merchant's items index page" do
 
     visit '/login'
     within  "form" do
-      fill_in :email,	with: @merchant_user.email
+      fill_in :email,	with: 'merchant@test.com'
       fill_in :password,	with: @merchant_user.password
       click_on 'Login'
     end
   end
 
-  it "text" do
-    visit '/mechant/dashboard'
+  it "can go merchant item page" do
+
+    visit '/merchant/dashboard'
 
     click_on 'My Items'
 
@@ -37,7 +38,7 @@ RSpec.describe "Merchant's items index page" do
   end
 end
 
-# 
+#
 # [ ] done
 #
 #
