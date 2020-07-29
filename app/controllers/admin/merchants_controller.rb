@@ -3,6 +3,10 @@ class Admin::MerchantsController < Admin::BaseAdminController
         @merchants = Merchant.all
     end
 
+    def show
+
+    end
+
     def update
         merchant = Merchant.find(params[:merchant_id])
         if merchant.enabled
@@ -18,9 +22,9 @@ class Admin::MerchantsController < Admin::BaseAdminController
             merchant.update(enabled: true)
             flash[:success] = "#{merchant.name} has been enabled"
         end
-        
+
         redirect_to admin_merchants_path
     end
-    
-    
+
+
 end
