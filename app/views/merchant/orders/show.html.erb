@@ -15,15 +15,17 @@
       <th>Image:</th>
       <th>Price:</th>
       <th>Quantity:</th>
+      <th>Fulfill</th>
     </tr>
-  <% @order.items.each do |item| %>
+  <% @order.item_orders.each do |item| %>
     <tr>
-    <section>
+    <section id= "item-<%=item.id%>">
     <% if item.merchant_id == current_user.merchant.id %>
       <td><p><%= link_to item.name, "/items/#{item.id}" %></p></td>
       <td><p><%= image_tag(item.image, size: "40x40") %></p></td>
       <td><p><%= number_to_currency(item.price) %></p></td>
       <td><p><%= item.quantity_ordered %></p></td>
+      <td><p><%= link_to_if item.inventory >= item.quantity_ordered, "Fulfill", "/merchant/orders/#{@order.id}?type=fulfill", method: :patch %></p></td>
     <% end %>
     </section>
     </tr>

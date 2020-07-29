@@ -19,8 +19,4 @@ class ItemOrder <ApplicationRecord
   def self.total_ordered(item)
     item.item_orders.sum(:quantity)
   end
-
-  def orders
-
-  end
 end
