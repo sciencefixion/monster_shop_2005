@@ -37,11 +37,3 @@ RSpec.describe "Merchant's items index page" do
     expect(current_path).to eq('/merchant/items')
   end
 end
-
-#
-# [ ] done
-#
-#
-#
-# When I click that link
-# My URI route should be "/merchant/items"

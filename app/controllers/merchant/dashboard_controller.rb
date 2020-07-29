@@ -4,6 +4,5 @@ class Merchant::DashboardController < Merchant::BaseMerchantController
   end
 
   def item_index
-
   end
 end
