@@ -55,5 +55,28 @@ describe Merchant, type: :model do
       expect(@meg.distinct_cities).to include("Hershey")
     end
 
+    xit 'pending_orders' do
+      @merchant = create(:merchant)
+
+      @item_1 = create(:item, merchant: @merchant)
+      @item_2 = create(:item, merchant: @merchant)
+
+      @merchant_user  = create(:user, merchant: @merchant, email: 'merchant@test.com',  role: 1)
+      @default_user_1 = create(:user)
+      @default_user_2 = create(:user)
+
+      @order_1 = create(:order, user: @default_user_1, status: 1)
+      @order_2 = create(:order, user: @default_user_1)
+      @order_3 = create(:order, user: @default_user_2)
+
+      @item_order_1 = create(:item_order, item: @item_1, order: @order_1)
+      @item_order_2 = create(:item_order, item: @item_1, order: @order_2)
+      @item_order_3 = create(:item_order, item: @item_2, order: @order_2)
+      @item_order_4 = create(:item_order, item: @item_2, order: @order_3)
+
+      expect(@merchant.pending_orders).to have_content(@order_2.id)
+      expect(@merchant.pending_orders).to have_content(@order_3.id)
+      expect(@merchant.pending_orders).to_not have_content(@order_1.id)
+    end
   end
 end
