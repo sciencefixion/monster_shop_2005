@@ -36,15 +36,18 @@ RSpec.describe "Merchant sees an order show page" do
     expect(current_path).to eq("/merchant/orders/#{order_2.id}")
     expect(page).to have_content(order_2.user.name)
     expect(page).to have_content(order_2.address)
-    expect(page).to have_link(item_1.name) # TO ITEM SHOW PAGE
-    expect(page).to have_link(item_2.name) # TO ITEM SHOW PAGE
-    expect(page).to have_link(item_1.image)
-    expect(page).to have_link(item_2.image)
-    expect(page).to have_link(item_1.price)
-    expect(page).to have_link(item_2.price)
-    expect(page).to have_link(item_1.quantity) # QUANTITY USER WANTS TO PURCHASE
-    expect(page).to have_link(item_2.quantity) # QUANTITY USER WANTS TO PURCHASE
+    expect(page).to have_link(item_1.name)
+    expect(page).to have_link(item_2.name)
+    expect(page).to have_css("img[src*='#{item_1.image}']")
+    expect(page).to have_css("img[src*='#{item_2.image}']")
+    expect(page).to have_content(item_1.price)
+    expect(page).to have_content(item_2.price)
+    expect(page).to have_content(item_1.quantity_ordered)
+    expect(page).to have_content(item_2.quantity_ordered)
     expect(page).to_not have_content(item_3.name)
+    expect(page).to_not have_content(item_3.price)
+    expect(page).to_not have_css("img[src*='#{item_3.image}']")
+    expect(page).to_not have_content(item_3.quantity_ordered)
   end
 end
 
