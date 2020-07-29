@@ -52,6 +52,5 @@ RSpec.describe "Merchant dashboard show page" do
     expect(page).to have_content(@order_3.date_created)
     expect(page).to have_content(@order_3.total_quantity_of_items)
     expect(page).to have_content(@order_3.grandtotal)
-    save_and_open_page
   end
 end
