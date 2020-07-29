@@ -42,13 +42,13 @@ RSpec.describe "Merchant dashboard show page" do
   it "Merchant dashboard displays orders" do
 
     visit "/merchant/dashboard"
-    expect(page).to_not have_link(@order_1.id) #(/merchant/orders/15)
+    expect(page).to_not have_link("#{@order_1.id}") #(/merchant/orders/15)
     expect(page).to_not have_content(@order_1.grandtotal)
-    expect(page).to have_link(@order_2.id) #(/merchant/orders/15)
+    expect(page).to have_link("#{@order_2.id}") #(/merchant/orders/15)
     expect(page).to have_content(@order_2.date_created)
     expect(page).to have_content(@order_2.total_quantity_of_items)
     expect(page).to have_content(@order_2.grandtotal)
-    expect(page).to have_link(@order_3.id) #(/merchant/orders/15)
+    expect(page).to have_link("#{@order_3.id}") #(/merchant/orders/15)
     expect(page).to have_content(@order_3.date_created)
     expect(page).to have_content(@order_3.total_quantity_of_items)
     expect(page).to have_content(@order_3.grandtotal)

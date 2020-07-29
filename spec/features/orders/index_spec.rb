@@ -55,8 +55,8 @@ RSpec.describe "User profile displays orders" do
   it "text" do
     visit '/profile/orders'
 
-    expect(page).to have_link(@order1.id)
-    expect(page).to have_link(@order2.id)
+    expect(page).to have_link("#{@order1.id}")
+    expect(page).to have_link("#{@order2.id}")
     expect(page).to have_content(@order1.date_created)
     expect(page).to have_content(@order2.date_created)
     expect(page).to have_content(@order1.date_last_updated)
