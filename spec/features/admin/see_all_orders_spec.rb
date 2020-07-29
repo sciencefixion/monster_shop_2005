@@ -32,7 +32,7 @@ RSpec.describe "see all orders" do
             within "#order-#{@order_1.id}" do
                 expect(page).to  have_content(@order_1.id)
                 expect(page).to  have_link(@order_1.user.name)
-                # expect(page).to  have_content(@order_1.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%B %d  %A %Y"))
+                expect(page).to  have_content(@order_1.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%B %d %Y"))
             end
         end
 

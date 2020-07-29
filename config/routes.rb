@@ -54,12 +54,15 @@ Rails.application.routes.draw do
   patch "/users/password", to: "passwords#update"
 
   namespace :merchant do
-    get "/dashboard", to: "dashboard#index"
+    get "/dashboard", to: "dashboard#show"
   end
 
   namespace :admin do
     get "/dashboard", to: "dashboard#index"
     get "/users/:user_id", to: "users#show"
+
+    get "/merchants", to: "merchants#index"
+    patch "/merchants/:merchant_id", to: "merchants#update"
   end
 
   namespace :profile do

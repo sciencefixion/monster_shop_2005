@@ -11,7 +11,13 @@
   <body>
     <nav class = "topnav">
       <%= link_to "Home", "/" %>
-      <%= link_to "All Merchants", "/merchants"%>
+      
+      <% if current_admin? %>
+        <%= link_to "All Merchants", "/admin/merchants"%>
+      <% else %>
+        <%= link_to "All Merchants", "/merchants"%>
+      <% end %>
+      
       <%= link_to "All Items", "/items"%>
       <%= link_to "Cart: #{cart.total_items}", "/cart" %>
       <% if current_user %>
@@ -20,7 +26,7 @@
         <%= link_to "Login", "/login" %>
         <%= link_to "Register", "/register" %>
       <% end %>
-      <%= link_to "Profile", "/profile" if current_user && current_user.default? %>
+      <%= link_to "Profile", "/profile" if current_user && !current_merchant? && !current_admin? %>
       <%= link_to "My Merchant Dashboard", "/merchant/dashboard" if current_merchant? %>
       <%= link_to "My Admin Dashboard", "/admin/dashboard" if current_admin? %>
 

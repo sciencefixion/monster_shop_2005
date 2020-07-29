@@ -118,6 +118,5 @@ RSpec.describe "Order show page" do
     within "#item-subtotal-#{@paper.id}" do
       expect(page).to have_content("Status: unfulfilled")
     end
-
    end
 end

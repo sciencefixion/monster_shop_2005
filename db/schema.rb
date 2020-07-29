@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20200728191227) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20200728191227) do
     t.integer "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: true
   end
 
   create_table "orders", force: :cascade do |t|
@@ -83,6 +85,8 @@ ActiveRecord::Schema.define(version: 20200728191227) do
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
     t.string "email"
+    t.bigint "merchant_id"
+    t.index ["merchant_id"], name: "index_users_on_merchant_id"
   end
 
   add_foreign_key "item_orders", "items"
@@ -90,4 +94,5 @@ ActiveRecord::Schema.define(version: 20200728191227) do
   add_foreign_key "items", "merchants"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "items"
+  add_foreign_key "users", "merchants"
 end
