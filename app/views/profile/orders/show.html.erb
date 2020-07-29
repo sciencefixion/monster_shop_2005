@@ -42,20 +42,36 @@
       <th>Subtotal</th>
     </tr>
 
+  <% if @order.status == "cancelled" %>
+    <% @order.item_orders.each do |item_order|%>
+      <tr>
+      <section id = "item-<%= item_order.item_id %>">
+          <td><p><%= link_to image_tag(item_order.item.image, size: "40x40"), "/items/#{item_order.item_id}" %></p></td>
+          <td id="item-name-<%= item_order.item_id %>"><p>Status: unfulfilled</p><p><%= link_to item_order.item.name, "/items/#{item_order.item_id}" %></p></td>
+          <td id="item-description-<%= item_order.item_id %>"><p>Status: unfulfilled</p><p><%= item_order.item.description %></p></td>
+          <td id="item-merchant-<%= item_order.item_id %>"><p>Status: unfulfilled</p><p><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}" %></p></td>
+          <td id="item-price-<%= item_order.item_id %>"><p>Status: unfulfilled</p><p><%= number_to_currency(item_order.price) %></p></td>
 
-  <% @order.item_orders.each do |item_order|%>
-    <tr>
-    <section id = "item-<%= item_order.item_id %>">
-        <td><p><%= link_to image_tag(item_order.item.image, size: "40x40"), "/items/#{item_order.item_id}" %></p></td>
-        <td><p><%= link_to item_order.item.name, "/items/#{item_order.item_id}" %></p></td>
-        <td><p><%= item_order.item.description %></p></td>
-        <td><p><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}" %></p></td>
-        <td><p><%= number_to_currency(item_order.price) %></p></td>
+          <td id="item-quantity-<%= item_order.item_id %>"><p>Status: unfulfilled</p><p align = "center"><%= item_order.quantity %></p></td>
+          <td id="item-subtotal-<%= item_order.item_id %>"><p>Status: unfulfilled</p><p><%= number_to_currency(item_order.subtotal) %></p></td>
+        </section>
+      </tr>
+    <% end %>
+  <% else %>
+    <% @order.item_orders.each do |item_order|%>
+      <tr>
+      <section id = "item-<%= item_order.item_id %>">
+          <td><p><%= link_to image_tag(item_order.item.image, size: "40x40"), "/items/#{item_order.item_id}" %></p></td>
+          <td><p><%= link_to item_order.item.name, "/items/#{item_order.item_id}" %></p></td>
+          <td><p><%= item_order.item.description %></p></td>
+          <td><p><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}" %></p></td>
+          <td><p><%= number_to_currency(item_order.price) %></p></td>
 
-        <td><p align = "center"><%= item_order.quantity %></p></td>
-        <td><p><%= number_to_currency(item_order.subtotal) %></p></td>
-      </section>
-    </tr>
+          <td><p align = "center"><%= item_order.quantity %></p></td>
+          <td><p><%= number_to_currency(item_order.subtotal) %></p></td>
+        </section>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 

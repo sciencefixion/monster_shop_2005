@@ -93,12 +93,31 @@ RSpec.describe "Order show page" do
      expect(current_path).to eq("/profile")
      expect(page).to have_content("Order number #{@order2.id} is now cancelled.")
 
-     # expect(order.status).to eq("cancelled")
      visit "/profile/orders/#{@order2.id}"
 
+     within "#item-name-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
 
+    within "#item-description-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-merchant-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-price-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-quantity-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-subtotal-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
 
    end
 end
-
-#namespace user as profile for profile orders
