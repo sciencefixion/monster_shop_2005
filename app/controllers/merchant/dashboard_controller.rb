@@ -3,7 +3,7 @@ class Merchant::DashboardController < Merchant::BaseMerchantController
     @user = current_user
   end
 
-  def index
+  def item_index
 
   end
 end
