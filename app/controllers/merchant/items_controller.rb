@@ -35,7 +35,8 @@ class Merchant::ItemsController < Merchant::BaseMerchantController
             flash[:success] = 'The Item has been created successfully.'
             redirect_to merchant_items_path
         else
-            p "x"
+            flash[:error] = item.errors.full_messages
+            redirect_to merchant_items_new_path
         end
         
     end
