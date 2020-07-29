@@ -22,8 +22,9 @@ tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never po
 pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
 dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
 
-@admin_user = create(:user , email: 'test@test1.com',  role: 2 )
+@admin_user = create(:user , email: 'admin@test.com',  role: 2 )
 @default_user = create(:user)
+@merchant_user = create(:user, merchant: bike_shop, email: 'merchant@test.com', role: 1 )
 
 @order_1 = create(:order , user: @default_user, status: 1)
 @order_2 = create(:order , user: @default_user)
@@ -32,3 +33,5 @@ dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it
 @order_5 = create(:order , user: @default_user, status: 3)
 @order_6 = create(:order , user: @default_user)
 @order_7 = create(:order , user: @default_user, status: 1)
+
+item = create(:item , merchant: bike_shop)
