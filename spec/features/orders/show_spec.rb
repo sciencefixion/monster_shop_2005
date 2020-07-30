@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User views an oder show page" do
+RSpec.describe "Order show page" do
   before :each do
     @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
     @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
@@ -46,7 +46,7 @@ RSpec.describe "User views an oder show page" do
 
   end
 
-  it "text" do
+  it "User views their order's show page" do
     visit "/profile/orders"
 
     click_on "#{@order2.id}"
@@ -71,4 +71,52 @@ RSpec.describe "User views an oder show page" do
     expect(page).to have_content("2")
     expect(page).to have_content(@order2.grandtotal)
   end
+
+  it "allows a user to cancel an order" do
+     # User Story 30, User cancels an order
+     #
+     # As a registered user
+     # When I visit an order's show page
+     # I see a button or link to cancel the order
+     # When I click the cancel button for an order, the following happens:
+     # - Each row in the "order items" table is given a status of "unfulfilled"
+     # - The order itself is given a status of "cancelled"
+     # - Any item quantities in the order that were previously fulfilled have their quantities returned to their respective merchant's inventory for that item.
+     # - I am returned to my profile page
+     # - I see a flash message telling me the order is now cancelled
+     # - And I see that this order now has an updated status of "cancelled"
+
+     visit "/profile/orders/#{@order2.id}"
+
+     click_on "Cancel Order"
+
+     expect(current_path).to eq("/profile")
+     expect(page).to have_content("Order number #{@order2.id} is now cancelled.")
+
+     visit "/profile/orders/#{@order2.id}"
+
+     within "#item-name-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-description-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-merchant-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-price-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-quantity-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+
+    within "#item-subtotal-#{@paper.id}" do
+      expect(page).to have_content("Status: unfulfilled")
+    end
+   end
 end

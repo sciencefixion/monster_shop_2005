@@ -14,7 +14,6 @@ RSpec.describe "Merchant navigation" do
 
     within 'nav' do
       expect(page).to have_link("Log Out")
-      expect(page).to have_link("Profile")
       expect(page).to have_link("My Merchant Dashboard")
       expect(page).to_not have_link("Login")
       expect(page).to_not have_link("Register")
