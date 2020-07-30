@@ -57,8 +57,10 @@ Rails.application.routes.draw do
     get "/dashboard", to: "dashboard#show"
     get "/items", to: "items#index"
     post "/items", to: "items#create"
-    get "/items/new", to: "items#new"
     patch "/items/:item_id", to: "items#update"
+    get "/items/new", to: "items#new"
+    get "/items/:item_id/edit", to: "items#edit"
+    patch "/items/:item_id/status", to: "items#active"
     delete "/items/:item_id", to: "items#delete"
   end
 
