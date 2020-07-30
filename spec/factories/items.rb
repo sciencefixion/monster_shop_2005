@@ -4,7 +4,6 @@ FactoryBot.define do
     merchant
     name         { Faker::TvShows::SiliconValley.invention }
     description  { Faker::TvShows::MichaelScott.quote }
-    image        { "/assets/img01" + ".jpg" }
     price        { rand(1..100) }
     inventory    { rand(1..66) }
   end
