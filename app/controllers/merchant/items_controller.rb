@@ -3,7 +3,7 @@ class Merchant::ItemsController < Merchant::BaseMerchantController
         @items = current_user.merchant.items 
     end
 
-    def update
+    def active
         item = Item.find(params[:item_id])
         if item.active?
             item.update(active?: false)
@@ -40,13 +40,24 @@ class Merchant::ItemsController < Merchant::BaseMerchantController
         end
         
     end
+
+    def edit
+        @item = Item.find(params[:item_id])
+    end
+
+    def update
+        item = Item.find(params[:item_id])
+        if item.update(item_params)
+            flash[:success] = "Item updated successfully."
+            redirect_to merchant_items_path
+        else
+            flash[:error] = item.errors.full_messages
+            redirect_to "/merchant/items/#{item.id}/edit"
+        end
+    end
     
     private
     def item_params
         params.permit(:name, :description, :image, :price, :inventory)
-    end
-    
-    
-    
-    
+    end 
 end
