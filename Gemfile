@@ -14,6 +14,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1', '>= 3.1.13'
+gem "factory_bot_rails"
+gem 'faker'
 
 
 group :development, :test do
@@ -25,8 +27,6 @@ group :development, :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'table_print', '~> 1.5', '>= 1.5.7'
-  gem "factory_bot_rails"
-  gem 'faker'
 end
 
 group :development do
