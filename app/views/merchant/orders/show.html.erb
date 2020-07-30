@@ -17,7 +17,7 @@
       <th>Quantity:</th>
       <th>Fulfill</th>
     </tr>
-  <% @order.item_orders.each do |item| %>
+  <% @order.items.each do |item| %>
     <tr>
     <section id= "item-<%=item.id%>">
     <% if item.merchant_id == current_user.merchant.id %>
@@ -25,7 +25,7 @@
       <td><p><%= image_tag(item.image, size: "40x40") %></p></td>
       <td><p><%= number_to_currency(item.price) %></p></td>
       <td><p><%= item.quantity_ordered %></p></td>
-      <td><p><%= link_to_if item.inventory >= item.quantity_ordered, "Fulfill", "/merchant/orders/#{@order.id}?type=fulfill", method: :patch %></p></td>
+      <td><p><%= button_to "Fulfill Item", "/merchant/orders/#{@order.id}", method: :patch %></p></td>
     <% end %>
     </section>
     </tr>

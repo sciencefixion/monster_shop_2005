@@ -23,5 +23,6 @@ class Order <ApplicationRecord
     items.count
   end
 
-
+  # def items_by_merchant
+  # end
 end

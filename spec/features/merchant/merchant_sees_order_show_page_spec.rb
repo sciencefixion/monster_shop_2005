@@ -5,9 +5,9 @@ RSpec.describe "As a Merchant, Order show page" do
     @merchant = create(:merchant)
     @merchant_2 = create(:merchant)
 
-    @item_1 = create(:item, merchant: @merchant)
-    @item_2 = create(:item, merchant: @merchant)
-    @item_3 = create(:item, merchant: @merchant_2)
+    @item_1 = create(:item, merchant: @merchant, inventory: 10)
+    @item_2 = create(:item, merchant: @merchant, inventory: 20)
+    @item_3 = create(:item, merchant: @merchant_2, inventory:50)
 
     @merchant_user = create(:user, merchant: @merchant, role: 1)
     @default_user_1 = create(:user)
@@ -18,9 +18,9 @@ RSpec.describe "As a Merchant, Order show page" do
     @order_3 = create(:order, user: @default_user_2)
 
     @item_order_1 = create(:item_order, item: @item_1, order: @order_1)
-    @item_order_2 = create(:item_order, item: @item_1, order: @order_2)
-    @item_order_3 = create(:item_order, item: @item_2, order: @order_2)
-    @item_order_3 = create(:item_order, item: @item_3, order: @order_2)
+    @item_order_2 = create(:item_order, item: @item_1, order: @order_2, quantity: 9)
+    @item_order_3 = create(:item_order, item: @item_2, order: @order_2, quantity: 22)
+    @item_order_3 = create(:item_order, item: @item_3, order: @order_2, quantity: 100)
     @item_order_4 = create(:item_order, item: @item_2, order: @order_3)
 
 
@@ -48,15 +48,15 @@ RSpec.describe "As a Merchant, Order show page" do
     expect(page).to have_content(@item_1.quantity_ordered)
     expect(page).to have_content(@item_2.quantity_ordered)
     expect(page).to_not have_content(@item_3.name)
-    save_and_open_page
   end
 
   it "merchant fulfills part of an order" do
 
-    click_on "#{@order_2.id}"
-
+    click_link "#{@order_2.id}"
+# save_and_open_page
     within "#item-#{@item_1.id}" do
-      click_button "Fulfill"
+      expect(page).to have_link(@item_1.name)
+      click_button "Fulfill Item"
     end
 
     expect(current_path).to eq("/merchant/orders/#{@order_2.id}")
@@ -71,6 +71,8 @@ RSpec.describe "As a Merchant, Order show page" do
   end
 end
 
+
+# item.inventory >= item.quantity_ordered
 
 
 # If the user's desired quantity is equal to or less than my current inventory quantity for that item

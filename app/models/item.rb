@@ -28,4 +28,7 @@ class Item <ApplicationRecord
   def quantity_ordered
     item_orders.sum(:quantity)
   end
+
+  def fulfilled?(items_id)
+  end
 end
