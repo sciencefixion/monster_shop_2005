@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     get "/items/:item_id/edit", to: "items#edit"
     patch "/items/:item_id/status", to: "items#active"
     delete "/items/:item_id", to: "items#delete"
+    get "/orders/:order_id", to: "orders#show"
   end
 
   namespace :admin do
