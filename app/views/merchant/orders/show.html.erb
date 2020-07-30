@@ -1,0 +1,14 @@
+<%= @order.user.name %>
+<%= @order.address %>
+<%= @order.city %>
+<%= @order.state %>
+<%= @order.zip %>
+
+<% @order.items.each do |item| %>
+  <% if item.merchant_id == current_user.merchant.id %>
+    <%= link_to item.name, "/items/#{item.id}" %>
+    <%= image_tag(item.image, size: "40x40") %>
+    <%= item.price %>
+    <%= item.quantity_ordered %>
+  <% end %>
+<% end %>

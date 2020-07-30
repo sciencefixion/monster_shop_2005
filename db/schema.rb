@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200728191227) do
+ActiveRecord::Schema.define(version: 20200729210935) do
 
 
   # These are extensions that must be enabled in order to support this database
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20200728191227) do
     t.string "name"
     t.string "description"
     t.integer "price"
-    t.string "image"
+    t.string "image", default: "https://tazacommune.com/wp-content/plugins/wp-appkit/default-themes/q-ios/img/img-icon.svg"
     t.boolean "active?", default: true
     t.integer "inventory"
     t.bigint "merchant_id"
