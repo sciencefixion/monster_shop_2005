@@ -15,13 +15,16 @@
         <p>Inventory: <%= item.inventory %> </p>
         <% if item.active? %>
           <p>Active</p>
-          <%= link_to "Deactivate", "/merchant/items/#{item.id}", method: :patch %>
+          <%= link_to "Deactivate", "/merchant/items/#{item.id}/status", method: :patch %>
         <% else %>
           <p>Inactive</p>
-          <%= link_to "Activate", "/merchant/items/#{item.id}", method: :patch %>
+          <%= link_to "Activate", "/merchant/items/#{item.id}/status", method: :patch %>
         <% end %>
+        <br>
+        <%= link_to "Edit Item", "/merchant/items/#{item.id}/edit" %>
 
         <%= link_to_if item.orders.empty?, "Delete", "/merchant/items/#{item.id}", method: :delete %>
+
       </section>
   <% end %>
 </section>
