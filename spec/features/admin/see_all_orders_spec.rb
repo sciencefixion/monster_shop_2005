@@ -126,5 +126,3 @@ RSpec.describe "see all orders" do
     
     
 end
-
-# And the user can no longer "cancel" the order.

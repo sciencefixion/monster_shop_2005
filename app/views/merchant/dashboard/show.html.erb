@@ -1,13 +1,13 @@
-<p>Logged in as <%= @user.name %></p>
+<p>Logged in as <%= current_user.name %></p>
 <p><%= link_to "My Items", "/merchant/items" %></p>
 
 <section align = "center">
-  <h1><%= @user.merchant.name %></h1>
+  <h1><%= current_user.merchant.name %></h1>
   <h2>Address:</h2>
-  <%= @user.merchant.address %><br>
-  <%= @user.merchant.city    %><br>
-  <%= @user.merchant.state   %><br>
-  <%= @user.merchant.zip     %><br>
+  <%= current_user.merchant.address %><br>
+  <%= current_user.merchant.city    %><br>
+  <%= current_user.merchant.state   %><br>
+  <%= current_user.merchant.zip     %><br>
 </section>
 
 <section class = "pending-orders">
@@ -19,7 +19,7 @@
       <th>Date last Updated:</th>
       <th>Total:</th>
     </tr>
-    <% @user.merchant.pending_orders.each do |order| %>
+    <% current_user.merchant.pending_orders.each do |order| %>
       <tr>
       <section>
         <td><p><%= link_to order.id, "/merchant/orders/#{order.id}" %></p></td>

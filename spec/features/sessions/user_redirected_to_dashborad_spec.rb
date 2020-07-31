@@ -30,7 +30,7 @@ RSpec.describe "user redirected to the dashboard", type: :feature do
     end 
 
     it "merchant user back redirected to profile page" do
-        user = User.create(name: "Pam", address: "3455 LKV", city: "Hell", state: "MI", email: "test@test.com", zip: "56765", password: "123456", role: 1)
+        user = create(:user ,email: "test@test.com", role: 1 )
         visit '/login'
         within  "form" do
             fill_in :email,	with: "test@test.com" 
