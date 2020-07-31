@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "User restrictions", type: :feature do
     describe "merchants restrictions" do
         it "merchant cannot use admin routes" do
-            user = User.create(name: "Jim", address: "3455 LKV", city: "Hell", state: "MI", email: "test@test.com", zip: "56765", password: "123456", role: 1)
+            user = create(:user, email: "test@test.com", role: 1)
             visit '/login'
             
             within  "form" do

@@ -24,14 +24,8 @@ RSpec.describe "Merchant sees an order show page" do
     item_order_4 = create(:item_order, item: item_2, order: order_3)
 
 
-    visit "/login"
-    within "form" do
-      fill_in :email, with: merchant_user.email
-      fill_in :password, with: merchant_user.password
-      click_on "Login"
-    end
-
-    click_on "#{order_2.id}"
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_user)
+    visit "/merchant/orders/#{order_2.id}"
 
     expect(current_path).to eq("/merchant/orders/#{order_2.id}")
     expect(page).to have_content(order_2.user.name)
@@ -45,9 +39,6 @@ RSpec.describe "Merchant sees an order show page" do
     expect(page).to have_content(item_1.quantity_ordered)
     expect(page).to have_content(item_2.quantity_ordered)
     expect(page).to_not have_content(item_3.name)
-    expect(page).to_not have_content(item_3.price)
-    expect(page).to_not have_css("img[src*='#{item_3.image}']")
-    expect(page).to_not have_content(item_3.quantity_ordered)
   end
 end
 

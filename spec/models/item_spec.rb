@@ -42,7 +42,7 @@ describe Item, type: :model do
     end
 
     it 'no orders' do
-      bert = User.create(name: "Bert", address: "123 Sesame St.", city: "NYC", state: "New York", zip: "10001", email: "bert@test.com", password: "123456")
+      bert = create(:user, name: "Bert", merchant: nil)
 
       expect(@chain.no_orders?).to eq(true)
       order = bert.orders.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)

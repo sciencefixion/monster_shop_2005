@@ -27,7 +27,6 @@ RSpec.describe "Admin can see a merchants dashboard" do
 
       visit "/admin/merchants"
       click_on "#{@merchant_1.name}"
-      save_and_open_page
 
       expect(current_path).to eq("/merchants/#{@merchant_1.id}")
     end
